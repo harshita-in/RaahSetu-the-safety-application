@@ -1,8 +1,13 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+
 import '../services/location_service.dart';
 import '../services/geofire_service.dart';
+import '../services/emergency_service.dart';
 
 class MapScreen extends StatefulWidget {
   const MapScreen({super.key});
@@ -14,8 +19,9 @@ class MapScreen extends StatefulWidget {
 class _MapScreenState extends State<MapScreen> {
   final LocationService _locationService = LocationService();
   final GeoFireService _geoFireService = GeoFireService();
-  final Completer<GoogleMapController> _controller = Completer();
+  final EmergencyService _emergencyService = EmergencyService();
 
+  final Completer<GoogleMapController> _controller = Completer();
   LatLng? _currentPosition;
   Set<Marker> _markers = {};
 
@@ -23,6 +29,25 @@ class _MapScreenState extends State<MapScreen> {
   void initState() {
     super.initState();
     _initLocation();
+    _setupFCM();
+  }
+
+  Future<void> _setupFCM() async {
+    final fcm = FirebaseMessaging.instance;
+    final settings = await fcm.requestPermission();
+
+    if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+      print("✅ Notifications permission granted");
+    }
+
+    String? token = await fcm.getToken();
+    if (token != null) {
+      final user = FirebaseAuth.instance.currentUser;
+      if (user != null) {
+        await FirebaseDatabase.instance.ref("users/${user.uid}/fcmToken").set(token);
+        print("✅ FCM Token saved for user: ${user.uid}");
+      }
+    }
   }
 
   Future<void> _initLocation() async {
@@ -34,16 +59,13 @@ class _MapScreenState extends State<MapScreen> {
       return;
     }
 
-    // Start location updates to Firebase
-    _locationService.startUpdatingLocation();
-
-    // Get first location
     final pos = await _locationService.getCurrentLocation();
     setState(() {
       _currentPosition = LatLng(pos.latitude, pos.longitude);
     });
 
-    // Query nearby users (within 2 km)
+    // Start uploading location + listen to nearby users
+    _locationService.startUpdatingLocation();
     _geoFireService.init();
     _geoFireService.queryNearby(pos.latitude, pos.longitude, 2.0).listen((map) {
       if (map != null) {
@@ -97,6 +119,17 @@ class _MapScreenState extends State<MapScreen> {
         onMapCreated: (GoogleMapController controller) {
           _controller.complete(controller);
         },
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () async {
+          await _emergencyService.triggerEmergency();
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text("🚨 Emergency Alert Sent!")),
+          );
+        },
+        icon: const Icon(Icons.warning, color: Colors.white),
+        label: const Text("HELP ME"),
+        backgroundColor: Colors.red,
       ),
     );
   }
