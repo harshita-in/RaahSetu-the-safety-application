@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../services/auth_service.dart';
-import '../services/google_auth_service.dart';
+import '../services/auth_services.dart';
+import '../services/google_auth_services.dart';
 import 'phone_auth_screen.dart';
 import 'map_screen.dart';
 

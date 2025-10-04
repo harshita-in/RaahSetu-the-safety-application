@@ -10,18 +10,23 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:geolocator_android/geolocator_android.dart';
 import 'package:google_maps_flutter_android/google_maps_flutter_android.dart';
 import 'package:google_sign_in_android/google_sign_in_android.dart';
+import 'package:url_launcher_android/url_launcher_android.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:geolocator_apple/geolocator_apple.dart';
 import 'package:google_maps_flutter_ios/google_maps_flutter_ios.dart';
 import 'package:google_sign_in_ios/google_sign_in_ios.dart';
+import 'package:url_launcher_ios/url_launcher_ios.dart';
 import 'package:flutter_local_notifications_linux/flutter_local_notifications_linux.dart';
 import 'package:geolocator_linux/geolocator_linux.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:url_launcher_linux/url_launcher_linux.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:geolocator_apple/geolocator_apple.dart';
 import 'package:google_sign_in_ios/google_sign_in_ios.dart';
+import 'package:url_launcher_macos/url_launcher_macos.dart';
 import 'package:flutter_local_notifications_windows/flutter_local_notifications_windows.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:url_launcher_windows/url_launcher_windows.dart';
 
 @pragma('vm:entry-point')
 class _PluginRegistrant {
@@ -65,6 +70,15 @@ class _PluginRegistrant {
         );
       }
 
+      try {
+        UrlLauncherAndroid.registerWith();
+      } catch (err) {
+        print(
+          '`url_launcher_android` threw an error: $err. '
+          'The app may not function as expected until you remove this plugin from pubspec.yaml'
+        );
+      }
+
     } else if (Platform.isIOS) {
       try {
         IOSFlutterLocalNotificationsPlugin.registerWith();
@@ -102,6 +116,15 @@ class _PluginRegistrant {
         );
       }
 
+      try {
+        UrlLauncherIOS.registerWith();
+      } catch (err) {
+        print(
+          '`url_launcher_ios` threw an error: $err. '
+          'The app may not function as expected until you remove this plugin from pubspec.yaml'
+        );
+      }
+
     } else if (Platform.isLinux) {
       try {
         LinuxFlutterLocalNotificationsPlugin.registerWith();
@@ -126,6 +149,15 @@ class _PluginRegistrant {
       } catch (err) {
         print(
           '`package_info_plus` threw an error: $err. '
+          'The app may not function as expected until you remove this plugin from pubspec.yaml'
+        );
+      }
+
+      try {
+        UrlLauncherLinux.registerWith();
+      } catch (err) {
+        print(
+          '`url_launcher_linux` threw an error: $err. '
           'The app may not function as expected until you remove this plugin from pubspec.yaml'
         );
       }
@@ -158,6 +190,15 @@ class _PluginRegistrant {
         );
       }
 
+      try {
+        UrlLauncherMacOS.registerWith();
+      } catch (err) {
+        print(
+          '`url_launcher_macos` threw an error: $err. '
+          'The app may not function as expected until you remove this plugin from pubspec.yaml'
+        );
+      }
+
     } else if (Platform.isWindows) {
       try {
         FlutterLocalNotificationsWindows.registerWith();
@@ -173,6 +214,15 @@ class _PluginRegistrant {
       } catch (err) {
         print(
           '`package_info_plus` threw an error: $err. '
+          'The app may not function as expected until you remove this plugin from pubspec.yaml'
+        );
+      }
+
+      try {
+        UrlLauncherWindows.registerWith();
+      } catch (err) {
+        print(
+          '`url_launcher_windows` threw an error: $err. '
           'The app may not function as expected until you remove this plugin from pubspec.yaml'
         );
       }
