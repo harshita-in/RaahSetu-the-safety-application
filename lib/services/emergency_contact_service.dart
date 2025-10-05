@@ -1,4 +1,3 @@
-import 'package:flutter_sms/flutter_sms.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -6,10 +5,19 @@ class EmergencyContactService {
   final List<String> _contacts = ["+919876543210", "+911234567890"]; // change to real contacts
 
   Future<void> sendEmergencySMS(String message) async {
-    if (await Permission.sms.request().isGranted) {
-      await sendSMS(message: message, recipients: _contacts);
-    } else {
-      print("❌ SMS permission denied");
+    // For now, we'll use the SMS app to send messages
+    // This is a fallback approach that opens the default SMS app
+    for (String contact in _contacts) {
+      final Uri smsUri = Uri(
+        scheme: 'sms',
+        path: contact,
+        query: 'body=${Uri.encodeComponent(message)}',
+      );
+      if (await canLaunchUrl(smsUri)) {
+        await launchUrl(smsUri);
+      } else {
+        print("❌ Cannot open SMS app");
+      }
     }
   }
 

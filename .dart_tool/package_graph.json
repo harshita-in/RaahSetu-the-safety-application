@@ -13,9 +13,7 @@
         "firebase_database",
         "firebase_messaging",
         "flutter",
-        "flutter_geofire",
         "flutter_local_notifications",
-        "flutter_sms",
         "geolocator",
         "google_maps_flutter",
         "google_sign_in",
@@ -81,16 +79,6 @@
       ]
     },
     {
-      "name": "flutter_sms",
-      "version": "2.3.3",
-      "dependencies": [
-        "flutter",
-        "flutter_web_plugins",
-        "plugin_platform_interface",
-        "url_launcher"
-      ]
-    },
-    {
       "name": "google_sign_in",
       "version": "7.2.0",
       "dependencies": [
@@ -121,13 +109,6 @@
         "geolocator_platform_interface",
         "geolocator_web",
         "geolocator_windows"
-      ]
-    },
-    {
-      "name": "flutter_geofire",
-      "version": "2.0.6",
-      "dependencies": [
-        "flutter"
       ]
     },
     {
@@ -403,20 +384,6 @@
       "dependencies": [
         "flutter",
         "url_launcher_platform_interface"
-      ]
-    },
-    {
-      "name": "plugin_platform_interface",
-      "version": "2.1.8",
-      "dependencies": [
-        "meta"
-      ]
-    },
-    {
-      "name": "flutter_web_plugins",
-      "version": "0.0.0",
-      "dependencies": [
-        "flutter"
       ]
     },
     {
@@ -775,9 +742,23 @@
       ]
     },
     {
+      "name": "plugin_platform_interface",
+      "version": "2.1.8",
+      "dependencies": [
+        "meta"
+      ]
+    },
+    {
       "name": "web",
       "version": "1.1.1",
       "dependencies": []
+    },
+    {
+      "name": "flutter_web_plugins",
+      "version": "0.0.0",
+      "dependencies": [
+        "flutter"
+      ]
     },
     {
       "name": "http",

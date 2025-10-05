@@ -214,14 +214,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_geofire:
-    dependency: "direct main"
-    description:
-      name: flutter_geofire
-      sha256: "736b828882dd487208f8cf1da0c9c5f4be0f58e867f2f3957fa5a47c06e8f79a"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.0.6"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -270,14 +262,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.30"
-  flutter_sms:
-    dependency: "direct main"
-    description:
-      name: flutter_sms
-      sha256: "2fe5f584f02596343557eeca56348f9b82413fefe83a423fab880cdbdf54d8d8"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.3.3"
   flutter_test:
     dependency: "direct dev"
     description: flutter

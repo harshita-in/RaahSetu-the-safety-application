@@ -164,12 +164,6 @@
       "languageVersion": "3.8"
     },
     {
-      "name": "flutter_geofire",
-      "rootUri": "file:///C:/Users/shrey/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_geofire-2.0.6",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
       "name": "flutter_lints",
       "rootUri": "file:///C:/Users/shrey/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_lints-5.0.0",
       "packageUri": "lib/",
@@ -204,12 +198,6 @@
       "rootUri": "file:///C:/Users/shrey/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_plugin_android_lifecycle-2.0.30",
       "packageUri": "lib/",
       "languageVersion": "3.7"
-    },
-    {
-      "name": "flutter_sms",
-      "rootUri": "file:///C:/Users/shrey/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_sms-2.3.3",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
     },
     {
       "name": "flutter_test",
